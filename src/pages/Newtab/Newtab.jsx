@@ -2,26 +2,30 @@ import React from 'react';
 import logo from '../../assets/img/logo.svg';
 import './Newtab.css';
 import './Newtab.scss';
+import { JitsiMeeting } from '@jitsi/react-sdk';
 
 const Newtab = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/Newtab/Newtab.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-        <h6>The color of this paragraph is defined using SASS.</h6>
-      </header>
-    </div>
+<JitsiMeeting
+    roomName = "PleaseUseAGoodRoomName"
+    configOverwrite = {{
+        startWithAudioMuted: true,
+        disableModeratorIndicator: true,
+        startScreenSharing: true,
+        enableEmailInStats: false
+    }}
+    interfaceConfigOverwrite = {{
+        DISABLE_JOIN_LEAVE_NOTIFICATIONS: true
+    }}
+    userInfo = {{
+        displayName: 'YOUR_USERNAME'
+    }}
+    onApiReady = { (externalApi) => {
+        // here you can attach custom event listeners to the Jitsi Meet External API
+        // you can also store it locally to execute commands
+    } }
+    getIFrameRef = { (iframeRef) => { iframeRef.style.height = '400px'; } }
+/>
   );
 };
 
